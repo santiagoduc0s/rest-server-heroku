@@ -1,5 +1,7 @@
 const express = require('express')
-var cors = require('cors')
+const cors = require('cors')
+
+const { bdConnection } = require('../config/database')
 
 class Server {
 
@@ -9,9 +11,15 @@ class Server {
 
         this.usersPath = '/api/users'
 
+        this.connectionDatabase()
+
         this.middlewares()
 
         this.routes()
+    }
+
+    async connectionDatabase() {
+        await bdConnection()
     }
 
     middlewares() {
